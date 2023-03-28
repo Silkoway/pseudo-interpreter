@@ -1,5 +1,3 @@
-from collections import deque
-
 from cambridgeScript.constants import OPERATORS
 from cambridgeScript.parser.syntax_tree import Expression, UnaryOp, BinaryOp, Primary
 from cambridgeScript.parser.tokens import Token
@@ -39,7 +37,7 @@ class ExpressionParser:
     # Recursive descent
     def _comparison(self) -> Expression:
         expr = self._term()
-        while op := self._match("==", "!=", "<", "<=", ">", ">="):
+        while op := self._match("=", "<>", "<", "<=", ">", ">="):
             right = self._term()
             expr = BinaryOp(OPERATORS[op.value], expr, right)
         return expr
